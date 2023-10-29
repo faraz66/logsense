@@ -26,10 +26,9 @@ const duplicateName = async (name) => {
 };
 
 const geUserData = async (query) => {
-    // const query = { userName: userName };
-    const result = await Util.mongo.findOne(deviceMongoCollection, query);
-
+    const result = await Util.mongo.findOne(deviceMongoCollection, query)
     return result;
+
 };
 
 const deleteData = async (tData, userInfo = {}) => {
@@ -310,15 +309,16 @@ const getData = async (tData, userInfo) => {
 
 const login = async (tData, res) => {
     const { userName, password } = tData;
-    console.log("User:req.body, ", password, userName)
+    const email = userName;
+    console.log("User:req.body, ",email,password)
 
     let query = { };
-    if (userName && password) {
+    if (email && password) {
         try {
-            query = { userName };
+            query = { email };
             console.log("User:query, ", query)
             const user = await geUserData(query);
-
+            console.log("User",user)
             if (!user) {
                 return res.status(400).json({ msg: 'Bad Request: User not found' });
             }

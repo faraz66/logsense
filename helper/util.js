@@ -64,6 +64,7 @@ const mongoPool = {
         const result = await Mongo.db
             .collection(collection)
             .findOne(filter, projection);
+            console.log("result-->",result,collection);
         return result;
     },
     async count(collection, filter, options = {}) {
